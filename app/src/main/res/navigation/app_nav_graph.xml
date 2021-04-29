@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/noteHomeLayout">
+
+    <fragment
+        android:id="@+id/noteHomeLayout"
+        android:name="com.karthik.blissv2alpha10.ui.NoteHomeLayout"
+        android:label="fragment_reminder_home_layout"
+        tools:layout="@layout/fragment_reminder_home_layout" >
+        <action
+            android:id="@+id/action_noteHomeLayout_to_todoHomeLayout"
+            app:destination="@id/todoHomeLayout" />
+        <action
+            android:id="@+id/action_noteHomeLayout_to_reminderHomeLayout"
+            app:destination="@id/reminderHomeLayout" />
+    </fragment>
+    <fragment
+        android:id="@+id/reminderHomeLayout"
+        android:name="com.karthik.blissv2alpha10.ui.ReminderHomeLayout"
+        android:label="ReminderHomeLayout" >
+        <action
+            android:id="@+id/action_reminderHomeLayout_to_todoHomeLayout"
+            app:destination="@id/todoHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_reminderHomeLayout_to_noteHomeLayout"
+            app:destination="@id/noteHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoHomeLayout"
+        android:name="com.karthik.blissv2alpha10.ui.TodoHomeLayout"
+        android:label="fragment_todo_home_layout"
+        tools:layout="@layout/fragment_todo_home_layout" >
+        <action
+            android:id="@+id/action_todoHomeLayout_to_reminderHomeLayout"
+            app:destination="@id/reminderHomeLayout" />
+        <action
+            android:id="@+id/action_todoHomeLayout_to_noteHomeLayout"
+            app:destination="@id/noteHomeLayout" />
+    </fragment>
+</navigation>

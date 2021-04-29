@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/note_card_text"
+                android:id="@+id/note_reminder_card_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -34,10 +34,10 @@
                 android:maxLines="2"
                 android:text="Lorem ipsum"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/note_card_content"
+                android:id="@+id/note_reminder_card_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -46,7 +46,7 @@
                 android:fontFamily="@font/medium"
                 android:maxLines="7"
                 android:text="@string/lipsum"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

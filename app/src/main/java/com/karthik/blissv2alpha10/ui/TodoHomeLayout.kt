@@ -1,20 +1,15 @@
-package com.karthik.blissv2alpha10
+package com.karthik.blissv2alpha10.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.MenuRes
-import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
+import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
-import kotlinx.android.synthetic.main.fragment_search_bar.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,10 +18,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SearchBarFragment.newInstance] factory method to
+ * Use the [TodoHomeLayout.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchBarFragment : Fragment() {
+class TodoHomeLayout : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,38 +32,6 @@ class SearchBarFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        hamburger.setOnClickListener {
-            showMenu(it, R.menu.menu_home)
-        }
-
-    }
-
-    private fun showMenu(v: View, @MenuRes menuRes: Int) {
-        val popup = PopupMenu(requireContext(), v)
-        popup.menuInflater.inflate(menuRes, popup.menu)
-
-        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
-            val homeViewModel : HomeViewModel by activityViewModels()
-            when(menuItem.title.toString()) {
-                "Notes" -> homeViewModel.setCurrent(0)
-                "Reminders" -> homeViewModel.setCurrent(1)
-                "Todos" -> homeViewModel.setCurrent(2)
-//                "About" -> homeViewModel.currentHome.value = "about"
-            }
-            true
-        }
-        popup.setOnDismissListener {
-            // Respond to popup being dismissed.
-        }
-        // Show the popup menu.
-        popup.show()
     }
 
     override fun onCreateView(
@@ -76,7 +39,16 @@ class SearchBarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_bar, container, false)
+
+        val homeViewModel: HomeViewModel by activityViewModels()
+
+        homeViewModel.getCurrent().observe(viewLifecycleOwner, Observer {
+            when(it) {
+                0 -> NavHostFragment.findNavController(this).navigate(R.id.action_todoHomeLayout_to_noteHomeLayout)
+                1 -> NavHostFragment.findNavController(this).navigate(R.id.action_todoHomeLayout_to_reminderHomeLayout)
+            }
+        })
+        return inflater.inflate(R.layout.fragment_todo_home_layout, container, false)
     }
 
     companion object {
@@ -86,12 +58,12 @@ class SearchBarFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchBarFragment.
+         * @return A new instance of fragment TodoHomeLayout.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SearchBarFragment().apply {
+            TodoHomeLayout().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

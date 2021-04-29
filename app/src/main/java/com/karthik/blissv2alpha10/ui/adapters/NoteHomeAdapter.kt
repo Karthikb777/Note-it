@@ -10,8 +10,8 @@ import com.karthik.blissv2alpha10.R
 
 class NoteHomeAdapter(private val context: Context): RecyclerView.Adapter<NoteHomeAdapter.NoteViewHolder>() {
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val noteCardText = itemView.findViewById<TextView>(R.id.note_card_text)
-        val noteCardContent = itemView.findViewById<TextView>(R.id.note_card_content)
+        val noteCardText = itemView.findViewById<TextView>(R.id.note_reminder_card_text)
+        val noteCardContent = itemView.findViewById<TextView>(R.id.note_reminder_card_content)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {

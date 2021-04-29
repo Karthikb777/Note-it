@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.karthik.blissv2alpha10.R
-import com.karthik.blissv2alpha10.ui.adapters.NoteHomeAdapter
+import com.karthik.blissv2alpha10.ui.adapters.ReminderHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
-import kotlinx.android.synthetic.main.fragment_note_home_layout.*
+import kotlinx.android.synthetic.main.fragment_reminder_home_layout.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,10 +24,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NoteHomeLayout.newInstance] factory method to
+ * Use the [ReminderHomeLayout.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NoteHomeLayout : Fragment() {
+class ReminderHomeLayout : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -39,33 +38,43 @@ class NoteHomeLayout : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+//        val navController = requireView().findNavController()
+//
+//        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+//        homeViewModel.currentHome.observe(viewLifecycleOwner, Observer {
+//            when(it) {
+//                "notes" -> navController.navigate(R.id.action_reminderHomeLayout_to_noteHomeLayout);
+//                "todos" -> navController.navigate(R.id.action_reminderHomeLayout_to_todoHomeLayout);
+//            }
+//        })
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        val adapter = NoteHomeAdapter(requireContext())
-        recyclerView.adapter = adapter
+
+        rRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        val adapter = ReminderHomeAdapter(requireContext())
+        rRecyclerView.adapter = adapter
+
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        val homeViewModel : HomeViewModel by activityViewModels()
+        val homeViewModel: HomeViewModel by activityViewModels()
 
         homeViewModel.getCurrent().observe(viewLifecycleOwner, Observer {
             when(it) {
-                1 -> NavHostFragment.findNavController(this).navigate(R.id.action_noteHomeLayout_to_reminderHomeLayout)
-                2 -> NavHostFragment.findNavController(this).navigate(R.id.action_noteHomeLayout_to_todoHomeLayout)
+                0 -> NavHostFragment.findNavController(this).navigate(R.id.action_reminderHomeLayout_to_noteHomeLayout)
+                2 -> NavHostFragment.findNavController(this).navigate(R.id.action_reminderHomeLayout_to_todoHomeLayout)
             }
         })
 
-        return inflater.inflate(R.layout.fragment_note_home_layout, container, false)
+        return inflater.inflate(R.layout.fragment_reminder_home_layout, container, false)
     }
 
     companion object {
@@ -75,16 +84,16 @@ class NoteHomeLayout : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment NoteHomeLayout.
+         * @return A new instance of fragment ReminderHomeLayout.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            NoteHomeLayout().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                ReminderHomeLayout().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
+                    }
                 }
-            }
     }
 }

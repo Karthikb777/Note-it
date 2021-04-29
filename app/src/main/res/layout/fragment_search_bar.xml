@@ -33,7 +33,6 @@
                 android:layout_gravity="center_vertical"
                 android:background="@color/transparent"
                 android:layout_margin="5dp"
-
                 android:id="@+id/hamburger"
                 />
 
@@ -49,7 +48,8 @@
                 android:background="@color/transparent"
                 android:hint="Search"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:paddingVertical="8dp"
+                android:textSize="16sp" />
 
 
             <ImageButton
