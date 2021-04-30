@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_noteHomeLayout_to_reminderHomeLayout"
             app:destination="@id/reminderHomeLayout" />
+        <action
+            android:id="@+id/action_noteHomeLayout_to_noteReminderView"
+            app:destination="@id/noteReminderView" />
     </fragment>
     <fragment
         android:id="@+id/reminderHomeLayout"
@@ -31,6 +34,9 @@
             app:destination="@id/noteHomeLayout"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_reminderHomeLayout_to_noteReminderView"
+            app:destination="@id/noteReminderView" />
     </fragment>
     <fragment
         android:id="@+id/todoHomeLayout"
@@ -44,4 +50,9 @@
             android:id="@+id/action_todoHomeLayout_to_noteHomeLayout"
             app:destination="@id/noteHomeLayout" />
     </fragment>
+    <fragment
+        android:id="@+id/noteReminderView"
+        android:name="com.karthik.blissv2alpha10.NoteReminderView"
+        android:label="fragment_note_reminder_view"
+        tools:layout="@layout/fragment_note_reminder_view" />
 </navigation>

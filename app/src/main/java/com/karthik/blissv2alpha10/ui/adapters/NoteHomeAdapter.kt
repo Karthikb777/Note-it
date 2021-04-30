@@ -5,17 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.karthik.blissv2alpha10.R
+import com.karthik.blissv2alpha10.ui.NoteHomeLayout
+import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 
-class NoteHomeAdapter(private val context: Context): RecyclerView.Adapter<NoteHomeAdapter.NoteViewHolder>() {
+class NoteHomeAdapter(private val context: Context, private val fragment: NoteHomeLayout): RecyclerView.Adapter<NoteHomeAdapter.NoteViewHolder>() {
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val noteCardText = itemView.findViewById<TextView>(R.id.note_reminder_card_text)
         val noteCardContent = itemView.findViewById<TextView>(R.id.note_reminder_card_content)
+        val noteCard = itemView.findViewById<MaterialCardView>(R.id.noteCardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val root = NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.note_reminder_card, parent, false))
+        root.noteCard.setOnClickListener {
+//            add safe args here while navigating
+//            TODO: add a back functionality to the back button
+            NavHostFragment.findNavController(fragment).navigate(R.id.action_noteHomeLayout_to_noteReminderView)
+        }
         return root
     }
 

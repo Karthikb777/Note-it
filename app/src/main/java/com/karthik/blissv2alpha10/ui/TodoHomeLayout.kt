@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.karthik.blissv2alpha10.R
+import com.karthik.blissv2alpha10.ui.adapters.TodoHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_todo_home_layout.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +36,14 @@ class TodoHomeLayout : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        val adapter = TodoHomeAdapter(requireContext())
+        tRecyclerView.adapter = adapter
     }
 
     override fun onCreateView(

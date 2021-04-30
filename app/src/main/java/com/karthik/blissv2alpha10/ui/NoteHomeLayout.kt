@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.ui.adapters.NoteHomeAdapter
+import com.karthik.blissv2alpha10.ui.adapters.TodoHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_note_home_layout.*
 
@@ -45,7 +46,7 @@ class NoteHomeLayout : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        val adapter = NoteHomeAdapter(requireContext())
+        val adapter = NoteHomeAdapter(requireContext(), this)
         recyclerView.adapter = adapter
 
     }
@@ -57,6 +58,7 @@ class NoteHomeLayout : Fragment() {
         // Inflate the layout for this fragment
 
         val homeViewModel : HomeViewModel by activityViewModels()
+
 
         homeViewModel.getCurrent().observe(viewLifecycleOwner, Observer {
             when(it) {
