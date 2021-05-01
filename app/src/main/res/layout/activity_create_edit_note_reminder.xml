@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateEditNoteReminderActivity">
+
+    <ImageButton
+        android:id="@+id/closeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/ic_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/saveBtn"
+        tools:layout_editor_absoluteX="22dp">
+
+        <EditText
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/medium"
+            android:hint="Title"
+            android:textSize="22sp" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp">
+
+            <EditText
+                android:id="@+id/noteContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/medium"
+                android:hint="Note"
+                android:textSize="17sp"
+                />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="22dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/voiceRecorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/alarm_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_mic" />
+
+                <TextView
+                    android:id="@+id/searchInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/regular"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="Press and hold to record"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/addImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/addImageIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_add_image" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/regular"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="Add image or video"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/addReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/add_alarm_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_add_alarm" />
+
+                <TextView
+                    android:id="@+id/addAlarmText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/regular"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="Add reminder"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
