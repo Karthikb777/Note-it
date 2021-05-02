@@ -23,7 +23,11 @@ class TodoHomeAdapter(private val context: Context): RecyclerView.Adapter<TodoHo
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.title.text = "Lorem ipsum sit amet"
+        holder.title.text = "It is a long established fact that a reader will be distracted by the readable content of a page\n" +
+                "        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less\n" +
+                "        normal distribution of letters, as opposed to using Content here, content here ,\n" +
+                "        making it look like readable English."
+//        TODO: change this
     }
 
     override fun getItemCount(): Int {

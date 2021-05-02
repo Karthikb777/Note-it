@@ -54,5 +54,15 @@
         android:id="@+id/noteReminderView"
         android:name="com.karthik.blissv2alpha10.NoteReminderView"
         android:label="fragment_note_reminder_view"
-        tools:layout="@layout/fragment_note_reminder_view" />
+        tools:layout="@layout/fragment_note_reminder_view" >
+        <argument
+            android:name="viewNote"
+            app:argType="com.karthik.blissv2alpha10.database.entities.NoteReminder" />
+        <action
+            android:id="@+id/action_noteReminderView_to_noteHomeLayout"
+            app:destination="@id/noteHomeLayout" />
+        <action
+            android:id="@+id/action_noteReminderView_to_reminderHomeLayout"
+            app:destination="@id/reminderHomeLayout" />
+    </fragment>
 </navigation>

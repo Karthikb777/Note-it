@@ -6,40 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.NoteHomeLayout">
 
+    <FrameLayout
+        android:id="@+id/searchBarHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/regular"
         android:text="Your notes"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBarHolder" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:background="@color/transparent"
         android:src="@drawable/ic_sort"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBarHolder" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_marginHorizontal="13dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginHorizontal="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/note_reminder_card"
-        tools:itemCount="10"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:itemCount="10"
+        tools:listitem="@layout/note_reminder_card" />
 
     <FrameLayout
         android:layout_width="match_parent"
