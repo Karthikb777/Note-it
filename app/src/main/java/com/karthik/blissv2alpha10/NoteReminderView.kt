@@ -1,6 +1,7 @@
 package com.karthik.blissv2alpha10
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import androidx.navigation.fragment.navArgs
 import com.karthik.blissv2alpha10.ui.NoteHomeLayoutDirections
 import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
 import kotlinx.android.synthetic.main.fragment_note_reminder_view.view.*
+
+const val ID = "com.karthik.notesApp.ID"
+const val TITLE = "com.karthik.notesApp.TITLE"
 
 class NoteReminderView : Fragment() {
 
@@ -39,6 +43,11 @@ class NoteReminderView : Fragment() {
 
         view.editBtn.setOnClickListener {
 //            add edit functionality
+            val editIntent = Intent(activity, CreateEditNoteReminderActivity::class.java).apply {
+                putExtra(ID, args.viewNote.id)
+                putExtra(TITLE, args.viewNote.title)
+            }
+            startActivity(editIntent)
         }
 
         view.deleteBtn.setOnClickListener {

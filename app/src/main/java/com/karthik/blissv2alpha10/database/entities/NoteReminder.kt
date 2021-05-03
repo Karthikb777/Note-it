@@ -9,19 +9,18 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "note_reminder_table")
 class NoteReminder(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "content")
     val content: String,
     @ColumnInfo(name = "date_created")
-    val dateCreated: String?,
+    val dateCreated: String = "",
     @ColumnInfo(name = "audio_uri")
-    val audioUri: String?,
+    val audioUri: String = "",
     @ColumnInfo(name = "image_uri")
-    val imageUri: String?,
+    val imageUri: String = "",
     @ColumnInfo(name = "reminder")
-    val reminder: String?
-) : Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+    val reminder: String = ""
+) : Parcelable

@@ -9,6 +9,10 @@ class NoteReminderRepository(private val noteReminderDao: NoteReminderDao) {
 
     val allNoteReminder : Flow<List<NoteReminder>> = noteReminderDao.getAllNoteReminders()
 
+    suspend fun getNoteByTitle(title: String) : Array<NoteReminder> {
+        return noteReminderDao.getNoteByTitle(title)
+    }
+
     suspend fun insertNoteReminder(noteReminder: NoteReminder) {
         noteReminderDao.insertNote(noteReminder)
     }

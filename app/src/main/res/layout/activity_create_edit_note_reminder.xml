@@ -107,7 +107,7 @@
 
                 <TextView
                     android:id="@+id/searchInput"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
@@ -151,7 +151,7 @@
                     android:src="@drawable/ic_add_image" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
@@ -195,7 +195,7 @@
 
                 <TextView
                     android:id="@+id/addAlarmText"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
