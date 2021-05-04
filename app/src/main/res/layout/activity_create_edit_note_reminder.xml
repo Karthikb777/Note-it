@@ -106,7 +106,7 @@
                     android:src="@drawable/ic_mic" />
 
                 <TextView
-                    android:id="@+id/searchInput"
+                    android:id="@+id/voiceRecordText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -116,9 +116,27 @@
                     android:fontFamily="@font/regular"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
-                    android:text="Press and hold to record"
+                    android:text="Click to add a voice note"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
+<!--                <SeekBar-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/playAddedRecording"-->
+<!--                    -->
+<!--                    />-->
+
+                <ImageButton
+                    android:id="@+id/stopRecordIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_close"
+                    android:visibility="gone"
+                    android:clickable="false"/>
 
             </LinearLayout>
 
@@ -160,7 +178,7 @@
                     android:fontFamily="@font/regular"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
-                    android:text="Add image or video"
+                    android:text="Add image"
                     android:textAlignment="center"
                     android:textSize="16sp" />
             </LinearLayout>

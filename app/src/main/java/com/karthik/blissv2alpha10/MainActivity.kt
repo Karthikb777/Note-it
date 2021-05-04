@@ -16,12 +16,15 @@ import com.karthik.blissv2alpha10.ui.ReminderHomeLayout
 import com.karthik.blissv2alpha10.ui.TodoHomeLayout
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private var currentFrag: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        createFolders()
 
         val homeViewModel : HomeViewModel by viewModels()
 
@@ -56,5 +59,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun createFolders() {
     }
 }
