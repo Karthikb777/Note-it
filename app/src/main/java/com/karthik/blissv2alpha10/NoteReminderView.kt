@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.karthik.blissv2alpha10.ui.NoteHomeLayoutDirections
+import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
 import kotlinx.android.synthetic.main.fragment_note_reminder_view.view.*
 
@@ -21,9 +23,13 @@ const val TITLE = "com.karthik.notesApp.TITLE"
 class NoteReminderView : Fragment() {
 
     private val args: NoteReminderViewArgs by navArgs()
+    private val homeViewModel : HomeViewModel by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        homeViewModel.setCurrent(-1)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +64,14 @@ class NoteReminderView : Fragment() {
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        homeViewModel.setCurrent(0)
+
+    }
+
     private fun goBack(){
         NavHostFragment.findNavController(this).navigate(R.id.action_noteReminderView_to_noteHomeLayout)
+        homeViewModel.setCurrent(0)
     }
 }

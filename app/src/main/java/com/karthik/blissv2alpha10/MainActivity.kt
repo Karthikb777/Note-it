@@ -46,6 +46,14 @@ class MainActivity : AppCompatActivity() {
         homeViewModel.getCurrent().observe(this, Observer {
 //            TODO: use this to remove the search bar fragment while displaying the view fragments
             currentFrag = it
+            if(it == -1) {
+                fabAdd.isVisible = false
+                fabAdd.isClickable = false
+            }
+            else {
+                fabAdd.isVisible = true
+                fabAdd.isClickable = true
+            }
         })
 
     }
