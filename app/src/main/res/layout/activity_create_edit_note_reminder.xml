@@ -133,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
+                    android:padding="5dp"
                     android:background="@color/transparent"
                     android:src="@drawable/ic_close"
                     android:visibility="gone"
