@@ -97,7 +97,7 @@
                         android:src="@drawable/ic_alarm" />
 
                     <TextView
-                        android:id="@+id/searchInput"
+                        android:id="@+id/reminderTime"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -165,12 +165,13 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/note_image"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_marginVertical="25dp"-->
-<!--                android:layout_height="200dp"-->
-<!--                android:src="@drawable/sample" />-->
+            <ImageView
+                android:id="@+id/noteImage"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="25dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="40dp"
+                 />
 
 
         </LinearLayout>
