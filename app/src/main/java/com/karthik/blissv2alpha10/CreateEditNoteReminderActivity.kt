@@ -3,20 +3,20 @@ package com.karthik.blissv2alpha10
 import android.Manifest
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -29,8 +29,7 @@ import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
 import kotlinx.android.synthetic.main.activity_create_edit_note_reminder.*
 import java.io.File
 import java.io.IOException
-import java.net.URI
-import java.nio.file.FileSystem
+import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.util.*
@@ -67,24 +66,33 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
         if (id != 0 && title!!.isNotEmpty()) {
             viewModel.getNoteByTitle(title)
             viewModel.gotNote.observe(this, Observer {
+
                 noteTitle.setText(it[0].title)
                 noteContent.setText(it[0].content)
-                if(it[0].audioUri != ""){
-                    voiceRecordText.setText("Click X to delete")
 
-                    stopRecordIcon.isClickable = true
-                    stopRecordIcon.isVisible = true
-
+                if (it[0].audioUri != "") {
+                    voiceRecordText.text = "Delete voice note"
                     val delURI = it[0].audioUri
-
-                    stopRecordIcon.setOnClickListener {
-                        stopRecordIcon.isClickable = false
-                        stopRecordIcon.isVisible = false
-
+                    voiceRecorder.setOnClickListener {
                         File(delURI).delete()
                         audTitle = ""
                         Toast.makeText(this, "Voice note removed", Toast.LENGTH_SHORT).show()
-                        voiceRecordText.text = "Click to add a voice note"
+                        voiceRecordText.text = "Add a voice note"
+                    }
+
+                if (it[0].imageUri != "") {
+                    imgTitle = it[0].imageUri
+                    addImageText.text = "Delete current image"
+                    val delImgURI = it[0].imageUri
+                    addImage.setOnClickListener {
+                        File(delImgURI).delete()
+                        addImageText.text = "Add image"
+                        imgTitle = ""
+                        }
+                    }
+
+                if (it[0].reminder != "") {
+                    reminderTime = it[0].reminder
                     }
                 }
                 noteToBeEdited = it[0]
@@ -103,9 +111,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
                 val recorder = MediaRecorder().apply {
                     setAudioSource(MediaRecorder.AudioSource.MIC)
-                    setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                    setOutputFile("${URI}/${currentTime}.mp3")
-                    setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+                    setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+                    setOutputFile("${URI}/${noteTitle.text}.mp3")
+                    setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
 
                     try {
                         prepare()
@@ -119,7 +127,8 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                     Toast.makeText(this, "stopped", Toast.LENGTH_SHORT).show()
                     voiceRecordText.text = "Voice note added"
 //                    setting the audTitle to the audio uri to be saved to db later
-                    audTitle = "$URI/$currentTime.mp3"
+                    audTitle = "$URI/${noteTitle.text}.mp3"
+//                    audTitle = "$URI/$currentTime.mp3"
                     recorder.apply {
                         stop()
                         release()
@@ -129,10 +138,10 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                         stopRecordIcon.isClickable = false
                         stopRecordIcon.isVisible = false
 
-                        File("$URI/$currentTime.mp3").delete()
+                        File("$URI/${noteTitle.text.toString()}.mp3").delete()
                         audTitle = ""
                         Toast.makeText(this, "Voice note removed", Toast.LENGTH_SHORT).show()
-                        voiceRecordText.text = "Click to add a voice note"
+                        voiceRecordText.text = "Add a voice note"
                     }
                 }
             } else {
@@ -185,13 +194,21 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
             timePicker.addOnPositiveButtonClickListener {
                 // call back code
-                reminderTime = "${datePicker.selection},${timePicker.hour},${timePicker.minute}"
-                Log.e("timee", "${
-                    Instant.ofEpochMilli(datePicker.selection!!).atZone(ZoneId.systemDefault()).toLocalDate()
-                },${timePicker.hour},${timePicker.minute}")
+                Log.e("timee", "${datePicker.selection!! + toMillis(timePicker.hour, timePicker.minute)}")
+                val setReminderInCalendar = datePicker.selection!! + toMillis(timePicker.hour, timePicker.minute)
+
                 reminderTime = "${
                     Instant.ofEpochMilli(datePicker.selection!!).atZone(ZoneId.systemDefault()).toLocalDate()
                 },${timePicker.hour},${timePicker.minute}"
+
+                val intent = Intent(Intent.ACTION_INSERT).apply {
+                    data = CalendarContract.Events.CONTENT_URI
+                    putExtra(CalendarContract.Events.TITLE, noteTitle.text.toString())
+                    putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, setReminderInCalendar)
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
             }
         }
 
@@ -202,12 +219,21 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
                 if (!toBeEdited) {
                     viewModel.insertNote(
-                            NoteReminder(title = title, content = content, audioUri = audTitle, imageUri = imgTitle, reminder = reminderTime)
-                    )
+                            NoteReminder(title = title,
+                                    content = content,
+                                    audioUri = audTitle,
+                                    imageUri = imgTitle,
+                                    reminder = reminderTime)
+                            )
                 } else {
                     viewModel.updateNote(
-                            NoteReminder(id = id, title = title, content = content, audioUri = audTitle, imageUri = imgTitle, reminder = reminderTime)
-                    )
+                            NoteReminder(id = id,
+                                    title = title,
+                                    content = content,
+                                    audioUri = audTitle,
+                                    imageUri = imgTitle,
+                                    reminder = reminderTime)
+                            )
                 }
                 goBack()
             }
@@ -236,10 +262,11 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             val currentTime = Calendar.getInstance().time
             val destination = "$URI/$currentTime.jpg"
 
-            File(destination).outputStream().use { out ->
-                fullPhoto.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                out.flush()
+            File(destination).outputStream().use {
+                fullPhoto.compress(Bitmap.CompressFormat.JPEG, 100, it)
+                it.flush()
             }
+            addImageText.text = "Image added"
             imgTitle = destination
         }
     }
@@ -296,11 +323,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
     private fun isAudioPermissionGranted() =
             ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO).equals(PackageManager.PERMISSION_GRANTED)
 
-
     private fun isWriteExternalStoragePermissionGranted() =
             ActivityCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE).equals(PackageManager.PERMISSION_GRANTED)
                     || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE).equals(PackageManager.PERMISSION_GRANTED)
-
 
     private fun requestWritePermission() {
         val permissions = mutableListOf<String>()
@@ -325,5 +350,12 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
     private fun goBack() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun toMillis(hr: Int, min: Int) : Int {
+//        1 minute = 60000 millisecs.
+        val minuteInMillis = min * 60000
+        val hourInMillis = hr * 60 * 60000
+        return hourInMillis + minuteInMillis
     }
 }

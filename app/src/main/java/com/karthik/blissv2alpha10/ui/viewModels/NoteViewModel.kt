@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.io.File
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -39,8 +40,20 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     @WorkerThread
-    fun deleteNote(noteReminder: NoteReminder) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteNote(noteReminder: NoteReminder) {
+
+//        cleanup code
+        if (noteReminder.audioUri != ""){
+            File(noteReminder.audioUri).delete()
+        }
+
+        if (noteReminder.imageUri != "") {
+            File(noteReminder.imageUri).delete()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
         repository.deleteNoteReminder(noteReminder)
+        }
     }
 
 //    TODO : add additional methods here

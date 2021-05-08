@@ -171,6 +171,7 @@
                     android:src="@drawable/ic_add_image" />
 
                 <TextView
+                    android:id="@+id/addImageText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

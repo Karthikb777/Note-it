@@ -115,14 +115,13 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/voice_note_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
-                android:paddingVertical="10dp"
+                android:paddingVertical="20dp"
                 app:cardBackgroundColor="#EEEEEE"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
@@ -134,7 +133,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/hamburger"
+                        android:id="@+id/mic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -142,24 +141,31 @@
                         android:background="@color/transparent"
                         android:src="@drawable/ic_mic" />
 
-                    <ImageButton
-                        android:id="@+id/searchIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="5dp"
-                        android:background="@color/transparent"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_play" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/playPause"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:background="@color/transparent"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:src="@drawable/ic_play"-->
+<!--                       />-->
 
-
-                    <SeekBar
-                        android:id="@+id/voice_note_seekbar"
+                    <TextView
+                        android:id="@+id/voiceNoteText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_weight="6" />
+                        android:layout_margin="5dp"
+                        android:layout_weight="6"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/regular"
+                        android:maxLines="1"
+                        android:paddingVertical="8dp"
+                        android:text="Play voice note"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -171,7 +177,14 @@
                 android:layout_marginVertical="25dp"
                 android:layout_height="wrap_content"
                 android:paddingBottom="40dp"
-                 />
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp">
+
+            </com.google.android.material.card.MaterialCardView>
 
 
         </LinearLayout>
