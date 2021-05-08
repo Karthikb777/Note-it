@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class NoteReminderRepository(private val noteReminderDao: NoteReminderDao) {
 
     val allNoteReminder : Flow<List<NoteReminder>> = noteReminderDao.getAllNoteReminders()
+    val allNoteReminderWithReminder : Flow<List<NoteReminder>> = noteReminderDao.getAllNoteRemindersWithReminders()
 
     suspend fun getNoteByTitle(title: String) : Array<NoteReminder> {
         return noteReminderDao.getNoteByTitle(title)

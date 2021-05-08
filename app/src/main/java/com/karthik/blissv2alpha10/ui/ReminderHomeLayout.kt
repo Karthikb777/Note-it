@@ -1,5 +1,6 @@
 package com.karthik.blissv2alpha10.ui
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,8 @@ import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.SearchBarFragment
 import com.karthik.blissv2alpha10.ui.adapters.ReminderHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.ReminderViewModel
 import kotlinx.android.synthetic.main.fragment_reminder_home_layout.*
 
 class ReminderHomeLayout : Fragment() {
@@ -27,11 +30,15 @@ class ReminderHomeLayout : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val reminderViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(ReminderViewModel::class.java)
 
         rRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        val adapter = ReminderHomeAdapter(requireContext())
+        val adapter = ReminderHomeAdapter(requireContext(), this)
         rRecyclerView.adapter = adapter
 
+        reminderViewModel.allReminders.observe(viewLifecycleOwner, {
+            adapter.updateList(it)
+        })
 
     }
 

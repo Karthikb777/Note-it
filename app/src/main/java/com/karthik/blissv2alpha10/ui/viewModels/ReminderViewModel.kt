@@ -18,7 +18,7 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
         repository = NoteReminderRepository(db.getNoteReminderDao())
     }
 
-    val allReminders: LiveData<List<NoteReminder>> = repository.allNoteReminder.asLiveData()
+    val allReminders: LiveData<List<NoteReminder>> = repository.allNoteReminderWithReminder.asLiveData()
 
     @WorkerThread
     fun insertReminder(noteReminder: NoteReminder) = viewModelScope.launch(Dispatchers.IO) {

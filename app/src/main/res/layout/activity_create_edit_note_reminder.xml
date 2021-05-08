@@ -215,7 +215,7 @@
                     android:src="@drawable/ic_add_alarm" />
 
                 <TextView
-                    android:id="@+id/addAlarmText"
+                    android:id="@+id/addReminderText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

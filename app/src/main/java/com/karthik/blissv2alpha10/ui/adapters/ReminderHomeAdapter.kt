@@ -5,29 +5,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.karthik.blissv2alpha10.R
+import com.karthik.blissv2alpha10.database.entities.NoteReminder
+import com.karthik.blissv2alpha10.ui.ReminderHomeLayout
+import com.karthik.blissv2alpha10.ui.ReminderHomeLayoutDirections
 
-class ReminderHomeAdapter(private val context: Context): RecyclerView.Adapter<ReminderHomeAdapter.ReminderViewHolder>() {
+class ReminderHomeAdapter(private val context: Context, private val fragment: ReminderHomeLayout): RecyclerView.Adapter<ReminderHomeAdapter.ReminderViewHolder>() {
+
+    private val allReminders: ArrayList<NoteReminder> = ArrayList()
 
     class ReminderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val reminderCardText = itemView.findViewById<TextView>(R.id.note_reminder_card_text)
         val reminderCardContent = itemView.findViewById<TextView>(R.id.note_reminder_card_content)
+        val reminderCard = itemView.findViewById<MaterialCardView>(R.id.noteReminderCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReminderViewHolder {
         val root = ReminderViewHolder(LayoutInflater.from(context).inflate(R.layout.note_reminder_card, parent, false))
 
+        root.reminderCard.setOnClickListener {
+//            safe args
+            val action = ReminderHomeLayoutDirections.actionReminderHomeLayoutToNoteReminderView(allReminders[root.adapterPosition])
+            NavHostFragment.findNavController(fragment).navigate(action)
+        }
+
         return root
     }
 
     override fun onBindViewHolder(holder: ReminderViewHolder, position: Int) {
-        holder.reminderCardText.text = "hello world"
-        holder.reminderCardContent.text = "hello world"
+        holder.reminderCardText.text = allReminders[position].title
+        holder.reminderCardContent.text = allReminders[position].content
     }
 
     override fun getItemCount(): Int {
-        return 50
+        return allReminders.size
+    }
+
+    fun updateList(newList: List<NoteReminder>) {
+        allReminders.clear()
+        allReminders.addAll(newList)
+
+        notifyDataSetChanged()
     }
 
 }

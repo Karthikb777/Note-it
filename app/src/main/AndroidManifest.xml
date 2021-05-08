@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" >
+        android:theme="@style/Theme.BlissV2Alpha10" >
         <activity android:name=".CreateEditNoteReminderActivity" >
         </activity>
         <activity android:name=".MainActivity" >

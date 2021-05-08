@@ -25,7 +25,7 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val noteCardText = itemView.findViewById<TextView>(R.id.note_reminder_card_text)
         val noteCardContent = itemView.findViewById<TextView>(R.id.note_reminder_card_content)
-        val noteCard = itemView.findViewById<MaterialCardView>(R.id.noteCardView)
+        val noteCard = itemView.findViewById<MaterialCardView>(R.id.noteReminderCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -35,7 +35,7 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
 //          safe args
             val action = NoteHomeLayoutDirections.actionNoteHomeLayoutToNoteReminderView(allNotes[root.adapterPosition])
             NavHostFragment.findNavController(fragment).navigate(action)
-        }
+}
         return root
     }
 

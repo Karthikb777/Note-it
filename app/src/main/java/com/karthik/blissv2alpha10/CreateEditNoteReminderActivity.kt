@@ -71,6 +71,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                 noteContent.setText(it[0].content)
 
                 if (it[0].audioUri != "") {
+                    audTitle = it[0].audioUri
                     voiceRecordText.text = "Delete voice note"
                     val delURI = it[0].audioUri
                     voiceRecorder.setOnClickListener {
@@ -93,6 +94,11 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
                 if (it[0].reminder != "") {
                     reminderTime = it[0].reminder
+                    addReminderText.text = "Delete reminder"
+                    addReminder.setOnClickListener {
+                        reminderTime = ""
+                        addReminderText.text = "Add reminder"
+                        }
                     }
                 }
                 noteToBeEdited = it[0]

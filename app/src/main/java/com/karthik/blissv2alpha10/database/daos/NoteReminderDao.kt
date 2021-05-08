@@ -10,6 +10,9 @@ interface NoteReminderDao {
     @Query("SELECT * FROM note_reminder_table ORDER BY id ASC")
     fun getAllNoteReminders() : Flow<List<NoteReminder>>
 
+    @Query("SELECT * FROM note_reminder_table WHERE reminder != '' ORDER BY id ASC")
+    fun getAllNoteRemindersWithReminders() : Flow<List<NoteReminder>>
+
     @Query("SELECT * FROM note_reminder_table WHERE title LIKE :title")
     suspend fun getNoteByTitle(title: String) : Array<NoteReminder>
 
