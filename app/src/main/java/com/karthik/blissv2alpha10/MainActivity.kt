@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        createFolders()
-
         val homeViewModel : HomeViewModel by viewModels()
 
         fabAdd.setOnClickListener {
@@ -39,8 +37,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(newReminderIntent)
                 }
                 2 -> {
-//                        TODO: change this to a new todo intent after creating new todo activity
-                    val newNoteIntent = Intent(this, CreateEditNoteReminderActivity::class.java)
+                    val newNoteIntent = Intent(this, CreateTodoActivity::class.java)
                     startActivity(newNoteIntent)
                 }
             }
@@ -59,8 +56,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-    }
-
-    private fun createFolders() {
     }
 }

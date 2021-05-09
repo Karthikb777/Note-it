@@ -12,7 +12,9 @@ class Todo(
     @ColumnInfo(name = "todo")
     val todoTitle: String,
     @ColumnInfo(name = "priority")
-    val priority: String
+    var priority: String,
+    @ColumnInfo(name = "isCompleted")
+    var isCompleted: Boolean
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

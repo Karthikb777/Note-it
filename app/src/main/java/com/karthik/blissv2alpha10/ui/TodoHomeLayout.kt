@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.SearchBarFragment
 import com.karthik.blissv2alpha10.ui.adapters.TodoHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo_home_layout.*
 
 class TodoHomeLayout : Fragment() {
@@ -25,9 +28,16 @@ class TodoHomeLayout : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel : TodoViewModel by viewModels()
+
         tRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = TodoHomeAdapter(requireContext())
+        val adapter = TodoHomeAdapter(requireContext(), viewModel)
         tRecyclerView.adapter = adapter
+
+        viewModel.allTodos.observe(viewLifecycleOwner, {
+            adapter.updateList(it)
+        })
+
     }
 
     override fun onCreateView(

@@ -29,7 +29,6 @@ import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
 import kotlinx.android.synthetic.main.activity_create_edit_note_reminder.*
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.util.*
@@ -218,27 +217,30 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             }
         }
 
-        saveBtn.setOnClickListener {
+        todoSaveBtn.setOnClickListener {
             if (noteTitle.text.isNotEmpty() && noteContent.text.isNotEmpty()) {
-                val title = noteTitle.text.toString()
+
+                val noteTitle = noteTitle.text.toString()
                 val content = noteContent.text.toString()
 
                 if (!toBeEdited) {
                     viewModel.insertNote(
-                            NoteReminder(title = title,
+                            NoteReminder(title = noteTitle,
                                     content = content,
                                     audioUri = audTitle,
                                     imageUri = imgTitle,
-                                    reminder = reminderTime)
+                                    reminder = reminderTime
+                                )
                             )
                 } else {
                     viewModel.updateNote(
                             NoteReminder(id = id,
-                                    title = title,
+                                    title = noteTitle,
                                     content = content,
                                     audioUri = audTitle,
                                     imageUri = imgTitle,
-                                    reminder = reminderTime)
+                                    reminder = reminderTime
+                                )
                             )
                 }
                 goBack()
@@ -248,7 +250,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             }
         }
 
-        closeBtn.setOnClickListener {
+        todoCloseBtn.setOnClickListener {
             goBack()
         }
     }

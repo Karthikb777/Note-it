@@ -8,7 +8,7 @@
     tools:context=".CreateEditNoteReminderActivity">
 
     <ImageButton
-        android:id="@+id/closeBtn"
+        android:id="@+id/todoCloseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/saveBtn"
+        android:id="@+id/todoSaveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -36,7 +36,7 @@
         android:layout_marginHorizontal="22dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/saveBtn"
+        app:layout_constraintTop_toBottomOf="@+id/todoSaveBtn"
         tools:layout_editor_absoluteX="22dp">
 
         <EditText

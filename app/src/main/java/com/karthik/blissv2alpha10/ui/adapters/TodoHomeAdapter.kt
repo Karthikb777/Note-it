@@ -1,6 +1,7 @@
 package com.karthik.blissv2alpha10.ui.adapters
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,12 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.karthik.blissv2alpha10.R
+import com.karthik.blissv2alpha10.database.entities.Todo
+import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 
-class TodoHomeAdapter(private val context: Context): RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
+class TodoHomeAdapter(private val context: Context, private val viewModel: TodoViewModel): RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
+
+    private val allTodos: ArrayList<Todo> = ArrayList()
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.findViewById<TextView>(R.id.todo_card_text)
@@ -18,19 +23,33 @@ class TodoHomeAdapter(private val context: Context): RecyclerView.Adapter<TodoHo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val root  = TodoViewHolder(LayoutInflater.from(context).inflate(R.layout.todo_card, parent, false))
-
+        root.completed.setOnClickListener {
+            val todo = allTodos[root.adapterPosition]
+            todo.isCompleted = true
+            todo.priority = "low"
+            viewModel.updateTodo(todo)
+            root.completed.setImageResource(R.drawable.ic_check_box)
+            root.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        }
         return root
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.title.text = "It is a long established fact that a reader will be distracted by the readable content of a page\n" +
-                "        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less\n" +
-                "        normal distribution of letters, as opposed to using Content here, content here ,\n" +
-                "        making it look like readable English."
-//        TODO: change this
+        holder.title.text = allTodos[position].todoTitle
+        if (allTodos[position].isCompleted) {
+            holder.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            holder.completed.setImageResource(R.drawable.ic_check_box)
+        }
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return allTodos.size
+    }
+
+    fun updateList(newList: List<Todo>) {
+        allTodos.clear()
+        allTodos.addAll(newList)
+
+        notifyDataSetChanged()
     }
 }

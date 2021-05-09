@@ -33,7 +33,7 @@
                 android:layout_weight="0"
                 android:layout_marginBottom="6dp"
                 android:background="@color/transparent"
-                android:src="@drawable/ic_check" />
+                android:src="@drawable/ic_check_box_outline" />
             <TextView
                 android:id="@+id/todo_card_text"
                 android:layout_width="wrap_content"

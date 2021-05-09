@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.BlissV2Alpha10"
+    tools:context=".CreateTodoActivity">
+
+    <ImageButton
+        android:id="@+id/todoCloseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/todoSaveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/ic_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/todoSaveBtn"
+        tools:layout_editor_absoluteX="22dp">
+
+        <EditText
+            android:id="@+id/todoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/medium"
+            android:hint="Todo"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set priority"
+            android:textSize="15sp"
+            android:fontFamily="@font/medium" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/priorityHigh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/semi_bold"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="High"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/priorityMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/semi_bold"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="Medium"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/priorityLow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:paddingVertical="8dp"
+            app:cardBackgroundColor="#EEEEEE"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/semi_bold"
+                    android:maxLines="1"
+                    android:paddingVertical="8dp"
+                    android:text="Low"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

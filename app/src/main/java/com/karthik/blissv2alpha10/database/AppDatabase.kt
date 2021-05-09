@@ -11,7 +11,7 @@ import com.karthik.blissv2alpha10.database.entities.NoteReminder
 import com.karthik.blissv2alpha10.database.entities.Todo
 
 @Fts4
-@Database(entities = [NoteReminder::class, Todo::class], version = 3, exportSchema = false)
+@Database(entities = [NoteReminder::class, Todo::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
 //    returns the daos
