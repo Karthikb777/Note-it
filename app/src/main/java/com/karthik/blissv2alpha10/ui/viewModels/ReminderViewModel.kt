@@ -18,6 +18,12 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
         repository = NoteReminderRepository(db.getNoteReminderDao())
     }
 
+    var gotReminder = MutableLiveData<Array<NoteReminder>>()
+
+    fun getNoteByTitle(title: String) = viewModelScope.launch {
+        gotReminder.value = repository.getNoteByTitle(title)
+    }
+
     val allReminders: LiveData<List<NoteReminder>> = repository.allNoteReminderWithReminder.asLiveData()
 
     @WorkerThread

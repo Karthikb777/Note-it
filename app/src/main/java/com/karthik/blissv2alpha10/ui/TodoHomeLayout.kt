@@ -27,7 +27,7 @@ class TodoHomeLayout : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel : TodoViewModel by viewModels()
+        val viewModel : TodoViewModel by activityViewModels()
 
         tRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = TodoHomeAdapter(requireContext(), viewModel)
@@ -37,6 +37,9 @@ class TodoHomeLayout : Fragment() {
             adapter.updateList(it)
         })
 
+        viewModel.gotTodo.observe(viewLifecycleOwner, {
+            adapter.updateList(it.toList())
+        })
     }
 
     override fun onCreateView(

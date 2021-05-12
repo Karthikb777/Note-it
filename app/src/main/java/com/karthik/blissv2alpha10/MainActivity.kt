@@ -15,6 +15,9 @@ import com.karthik.blissv2alpha10.ui.NoteHomeLayout
 import com.karthik.blissv2alpha10.ui.ReminderHomeLayout
 import com.karthik.blissv2alpha10.ui.TodoHomeLayout
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.ReminderViewModel
+import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -25,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val homeViewModel : HomeViewModel by viewModels()
+        val noteViewModel : NoteViewModel by viewModels()
+        val todoViewModel : TodoViewModel by viewModels()
+        val reminderViewModel : ReminderViewModel by viewModels()
 
         fabAdd.setOnClickListener {
             when(currentFrag) {

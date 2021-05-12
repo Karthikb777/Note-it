@@ -8,6 +8,10 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     val alltodos : Flow<List<Todo>> = todoDao.getAllTodos()
 
+    suspend fun getTodoByTitle(title: String) : Array<Todo> {
+        return todoDao.getTodoByTitle(title)
+    }
+
     suspend fun insertTodo(todo: Todo) {
         todoDao.insertTodo(todo)
     }

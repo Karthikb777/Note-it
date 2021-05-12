@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.*
 import com.karthik.blissv2alpha10.database.AppDatabase
+import com.karthik.blissv2alpha10.database.entities.NoteReminder
 import com.karthik.blissv2alpha10.database.entities.Todo
 import com.karthik.blissv2alpha10.repository.NoteReminderRepository
 import com.karthik.blissv2alpha10.repository.TodoRepository
@@ -17,6 +18,12 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val db = AppDatabase.getDatabase(application)
         repository = TodoRepository(db.getTodoDao())
+    }
+
+    var gotTodo = MutableLiveData<Array<Todo>>()
+
+    fun getTodoByTitle(title: String) = viewModelScope.launch {
+        gotTodo.value = repository.getTodoByTitle(title)
     }
 
     val allTodos : LiveData<List<Todo>> = repository.alltodos.asLiveData()

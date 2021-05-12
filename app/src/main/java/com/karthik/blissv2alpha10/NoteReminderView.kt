@@ -45,9 +45,10 @@ class NoteReminderView : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val noteViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(
-                Application()
-        )).get(NoteViewModel::class.java)
+        val noteViewModel : NoteViewModel by activityViewModels()
+//        val noteViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(
+//                Application()
+//        )).get(NoteViewModel::class.java)
 
         val view =  inflater.inflate(R.layout.fragment_note_reminder_view, container, false)
 

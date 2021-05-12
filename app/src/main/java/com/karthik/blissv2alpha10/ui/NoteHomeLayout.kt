@@ -41,7 +41,8 @@ class NoteHomeLayout : Fragment() {
 
         val db = AppDatabase.getDatabase(requireContext())
 
-        val noteViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(NoteViewModel::class.java)
+//        val noteViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(NoteViewModel::class.java)
+        val noteViewModel : NoteViewModel by activityViewModels()
         val homeViewModel : HomeViewModel by activityViewModels()
 
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
@@ -50,6 +51,10 @@ class NoteHomeLayout : Fragment() {
 
         noteViewModel.allNotes.observe(viewLifecycleOwner, Observer {
             adapter.updateList(it)
+        })
+
+        noteViewModel.gotNote.observe(viewLifecycleOwner, {
+            adapter.updateList(it.toList())
         })
 
     }

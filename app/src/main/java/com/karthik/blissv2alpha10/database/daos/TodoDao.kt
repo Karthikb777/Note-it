@@ -10,6 +10,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun getAllTodos() : Flow<List<Todo>>
 
+    @Query("SELECT * FROM todo_table WHERE todo LIKE :title")
+    suspend fun getTodoByTitle(title: String) : Array<Todo>
+
     @Insert
     suspend fun insertTodo(todo: Todo)
 
