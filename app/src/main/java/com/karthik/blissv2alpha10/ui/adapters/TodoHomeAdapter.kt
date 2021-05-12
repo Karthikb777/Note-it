@@ -14,7 +14,7 @@ import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.database.entities.Todo
 import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 
-class TodoHomeAdapter(private val context: Context, private val viewModel: TodoViewModel): RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
+class TodoHomeAdapter(private val context: Context, private val viewModel: TodoViewModel) : RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
 
     private val allTodos: ArrayList<Todo> = ArrayList()
 
@@ -26,20 +26,18 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val root  = TodoViewHolder(LayoutInflater.from(context).inflate(R.layout.todo_card, parent, false))
-//
+        val root  = TodoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.todo_card, parent, false))
+
         root.completed.setOnClickListener {
             val todo = allTodos[root.adapterPosition]
-            todo.isCompleted = true
-            todo.priority = "low"
+            todo.isCompleted = !todo.isCompleted
             viewModel.updateTodo(todo)
-            root.completed.setImageResource(R.drawable.ic_check_box)
-            root.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            notifyItemChanged(root.adapterPosition)
         }
 
         root.deleteBtn.setOnClickListener {
             viewModel.deleteTodo(allTodos[root.adapterPosition])
-            notifyDataSetChanged()
+            notifyItemRemoved(root.adapterPosition)
         }
         return root
     }
@@ -54,6 +52,8 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
         if (allTodos[position].isCompleted) {
             holder.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             holder.completed.setImageResource(R.drawable.ic_check_box)
+        } else {
+            holder.completed.setImageResource(R.drawable.ic_check_box_outline)
         }
     }
 
@@ -63,8 +63,7 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
 
     fun updateList(newList: List<Todo>) {
         allTodos.clear()
-        allTodos.addAll(newList.reversed())
-
+        allTodos.addAll(newList)
         notifyDataSetChanged()
     }
 }

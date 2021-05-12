@@ -41,9 +41,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
     private val RECORD_AUDIO_PERMISSION_REQUEST_CODE: Int = 1
     private val IMAGE_GET_REQUEST_CODE: Int = 2
 
-    private lateinit var audTitle: String
-    private lateinit var imgTitle: String
-    private lateinit var reminderTime: String
+    private var audTitle: String? = ""
+    private var imgTitle: String? = ""
+    private var reminderTime: String? = ""
 
     private lateinit var noteToBeEdited: NoteReminder
 
@@ -54,10 +54,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("com.karthik.notesApp.ID", 0)
         val title = intent.getStringExtra("com.karthik.notesApp.TITLE")
-
-        reminderTime = ""
-        audTitle = ""
-        imgTitle = ""
+        reminderTime = intent.getStringExtra("com.karthik.notesApp.REMINDER") ?: ""
+        audTitle = intent.getStringExtra("com.karthik.notesApp.AUD_URI") ?: ""
+        imgTitle = intent.getStringExtra("com.karthik.notesApp.IMG_URI") ?: ""
 
         var toBeEdited = false
 
@@ -243,9 +242,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                     viewModel.insertNote(
                             NoteReminder(title = noteTitle,
                                     content = content,
-                                    audioUri = audTitle,
-                                    imageUri = imgTitle,
-                                    reminder = reminderTime
+                                    audioUri = audTitle!!,
+                                    imageUri = imgTitle!!,
+                                    reminder = reminderTime!!
                                 )
                             )
                 } else {
@@ -253,9 +252,9 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                             NoteReminder(id = id,
                                     title = noteTitle,
                                     content = content,
-                                    audioUri = audTitle,
-                                    imageUri = imgTitle,
-                                    reminder = reminderTime
+                                    audioUri = audTitle!!,
+                                    imageUri = imgTitle!!,
+                                    reminder = reminderTime!!
                                 )
                             )
                     }

@@ -28,6 +28,9 @@ import kotlinx.android.synthetic.main.fragment_note_reminder_view.view.*
 
 const val ID = "com.karthik.notesApp.ID"
 const val TITLE = "com.karthik.notesApp.TITLE"
+const val IMG_URI = "com.karthik.notesApp.IMG_URI"
+const val AUD_URI = "com.karthik.notesApp.AUD_URI"
+const val REMINDER = "com.karthik.notesApp.REMINDER"
 
 class NoteReminderView : Fragment() {
     private val args: NoteReminderViewArgs by navArgs()
@@ -80,6 +83,9 @@ class NoteReminderView : Fragment() {
             val editIntent = Intent(activity, CreateEditNoteReminderActivity::class.java).apply {
                 putExtra(ID, args.viewNote.id)
                 putExtra(TITLE, args.viewNote.title)
+                putExtra(IMG_URI, args.viewNote.imageUri)
+                putExtra(AUD_URI, args.viewNote.audioUri)
+                putExtra(REMINDER, args.viewNote.reminder)
             }
             startActivity(editIntent)
         }

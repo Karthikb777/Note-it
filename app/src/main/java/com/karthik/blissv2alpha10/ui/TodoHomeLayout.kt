@@ -9,15 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.SearchBarFragment
 import com.karthik.blissv2alpha10.ui.adapters.TodoHomeAdapter
 import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 import kotlinx.android.synthetic.main.fragment_todo_home_layout.*
+import kotlinx.android.synthetic.main.fragment_todo_home_layout.view.*
 
 class TodoHomeLayout : Fragment() {
 
@@ -58,6 +57,7 @@ class TodoHomeLayout : Fragment() {
                 1 -> NavHostFragment.findNavController(this).navigate(R.id.action_todoHomeLayout_to_reminderHomeLayout)
             }
         })
+
         return inflater.inflate(R.layout.fragment_todo_home_layout, container, false)
     }
 
