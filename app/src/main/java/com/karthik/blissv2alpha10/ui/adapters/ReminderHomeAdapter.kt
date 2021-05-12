@@ -46,7 +46,7 @@ class ReminderHomeAdapter(private val context: Context, private val fragment: Re
 
     fun updateList(newList: List<NoteReminder>) {
         allReminders.clear()
-        allReminders.addAll(newList)
+        allReminders.addAll(newList.reversed())
 
         notifyDataSetChanged()
     }

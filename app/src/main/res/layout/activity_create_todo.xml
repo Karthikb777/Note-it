@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set priority"
+            android:text="Priority"
             android:textSize="15sp"
             android:fontFamily="@font/medium" />
 
@@ -63,7 +63,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -74,12 +74,12 @@
                     android:layout_margin="5dp"
                     android:layout_weight="6"
                     android:background="@color/transparent"
-                    android:fontFamily="@font/semi_bold"
+                    android:fontFamily="@font/medium"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
                     android:text="High"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -90,7 +90,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -101,12 +101,12 @@
                     android:layout_margin="5dp"
                     android:layout_weight="6"
                     android:background="@color/transparent"
-                    android:fontFamily="@font/semi_bold"
+                    android:fontFamily="@font/medium"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
                     android:text="Medium"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -117,7 +117,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -128,12 +128,12 @@
                     android:layout_margin="5dp"
                     android:layout_weight="6"
                     android:background="@color/transparent"
-                    android:fontFamily="@font/semi_bold"
+                    android:fontFamily="@font/medium"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
                     android:text="Low"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
 

@@ -50,7 +50,7 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
 
     fun updateList(newList: List<NoteReminder>) {
         allNotes.clear()
-        allNotes.addAll(newList)
+        allNotes.addAll(newList.reversed())
         notifyDataSetChanged()
     }
 }

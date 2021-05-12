@@ -87,7 +87,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -117,7 +117,7 @@
                     android:fontFamily="@font/regular"
                     android:maxLines="1"
                     android:paddingVertical="8dp"
-                    android:text="Click to add a voice note"
+                    android:text="Add a voice note"
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
@@ -151,7 +151,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -195,7 +195,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:paddingVertical="8dp"
-            app:cardBackgroundColor="#EEEEEE"
+            app:cardBackgroundColor="?attr/cardBackgroundColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 

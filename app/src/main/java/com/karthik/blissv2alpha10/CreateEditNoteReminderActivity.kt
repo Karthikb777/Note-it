@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
 import android.provider.CalendarContract
@@ -18,6 +19,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -157,7 +159,20 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
         addImage.setOnClickListener {
 
-            if (isWriteExternalStoragePermissionGranted() && Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                val URI = getAppDirectories("img")
+
+                Calendar.getInstance().time
+
+                val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                    type = "image/*"
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivityForResult(intent, IMAGE_GET_REQUEST_CODE)
+                }
+            }
+            else {
+                if (isWriteExternalStoragePermissionGranted() && Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
             Log.e("writePerm", "write permission granted")
                 val URI = getAppDirectories("img")
 
@@ -172,6 +187,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
             } else {
             requestWritePermission()
+                }
             }
         }
 
@@ -242,7 +258,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                                     reminder = reminderTime
                                 )
                             )
-                }
+                    }
                 goBack()
             }
             else {
@@ -282,11 +298,15 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
     private fun getAppDirectories(type: String) : String {
         val imgURI: String
         val audURI: String
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            Log.e("writePerm1", "" +
-                    "${Environment.getStorageDirectory()}")
+        Log.e("writePerm1", "working1")
 
-            val rootDir = Environment.getStorageDirectory()
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            Log.e("writePerm1", "" +
+                    ContextCompat.getExternalFilesDirs(this, null)[0].toString())
+            Log.e("writePerm1", "working2")
+
+            val rootDir = ContextCompat.getExternalFilesDirs(this, null)[0]
+//            val rootDir = Environment.getStorageDirectory()
 
             audURI = if (File(rootDir.toString(), "Bliss/audio").exists()) {
                 File(rootDir.toString(), "Bliss/audio").toString()
@@ -322,28 +342,32 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             }
         }
         when(type) {
-            "img" -> return imgURI
-            "aud" -> return audURI
+            "img" -> {
+                Log.e("writePerm1", imgURI)
+                return imgURI
+            }
+            "aud" -> {
+                Log.e("writePerm1", audURI)
+                return audURI
+            }
         }
         return ""
     }
 
     private fun isAudioPermissionGranted() =
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO).equals(PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
 
     private fun isWriteExternalStoragePermissionGranted() =
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE).equals(PackageManager.PERMISSION_GRANTED)
-                    || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE).equals(PackageManager.PERMISSION_GRANTED)
+            SDK_INT >= Build.VERSION_CODES.R
+                    || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
     private fun requestWritePermission() {
         val permissions = mutableListOf<String>()
             if (!isWriteExternalStoragePermissionGranted()) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                permissions.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-            } else {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
                 permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                ActivityCompat.requestPermissions(this, permissions.toTypedArray(), WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE)
             }
-            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE)
         }
     }
 
