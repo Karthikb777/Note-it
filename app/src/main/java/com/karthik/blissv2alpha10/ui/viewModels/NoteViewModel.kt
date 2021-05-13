@@ -23,11 +23,18 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val allNotes: LiveData<List<NoteReminder>> = repository.allNoteReminder.asLiveData()
+//    val allNotes: LiveData<List<NoteReminder>> = repository.allNoteReminder.asLiveData()
     var gotNote = MutableLiveData<Array<NoteReminder>>()
 
     fun getNoteByTitle(title: String) = viewModelScope.launch {
         gotNote.value = repository.getNoteByTitle(title)
         }
+
+    fun searchNote(title: String) {
+        gotNote.value = allNotes.value?.filter {
+            it.title.contains(title)
+        }?.toTypedArray()
+    }
 
     @WorkerThread
     fun insertNote(noteReminder: NoteReminder) = viewModelScope.launch(Dispatchers.IO) {

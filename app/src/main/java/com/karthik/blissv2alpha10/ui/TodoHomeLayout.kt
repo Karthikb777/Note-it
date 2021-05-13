@@ -28,9 +28,10 @@ class TodoHomeLayout : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel : TodoViewModel by activityViewModels()
+        val homeViewModel : HomeViewModel by activityViewModels()
 
         tRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = TodoHomeAdapter(requireContext(), viewModel)
+        val adapter = TodoHomeAdapter(requireContext(), viewModel, homeViewModel)
         tRecyclerView.adapter = adapter
 
         viewModel.allTodos.observe(viewLifecycleOwner, {
@@ -39,6 +40,12 @@ class TodoHomeLayout : Fragment() {
 
         viewModel.gotTodo.observe(viewLifecycleOwner, {
             adapter.updateList(it.toList())
+        })
+
+        homeViewModel.getSearch().observe(viewLifecycleOwner, {
+            if (it == 0) {
+                adapter.updateList(viewModel.allTodos.value)
+            }
         })
     }
 

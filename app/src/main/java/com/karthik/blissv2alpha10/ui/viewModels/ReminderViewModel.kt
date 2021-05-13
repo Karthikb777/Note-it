@@ -24,6 +24,12 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
         gotReminder.value = repository.getNoteByTitle(title)
     }
 
+    fun searchReminder(title: String) {
+        gotReminder.value = allReminders.value?.filter {
+            it.title.contains(title)
+        }?.toTypedArray()
+    }
+
     val allReminders: LiveData<List<NoteReminder>> = repository.allNoteReminderWithReminder.asLiveData()
 
     @WorkerThread

@@ -22,6 +22,7 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
 
     private val allNotes : ArrayList<NoteReminder> = ArrayList()
 
+
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val noteCardText = itemView.findViewById<TextView>(R.id.note_reminder_card_text)
         val noteCardContent = itemView.findViewById<TextView>(R.id.note_reminder_card_content)
@@ -34,6 +35,7 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
         root.noteCard.setOnClickListener {
 //          safe args
             val action = NoteHomeLayoutDirections.actionNoteHomeLayoutToNoteReminderView(allNotes[root.adapterPosition])
+            viewModel.setCurrent(10)
             NavHostFragment.findNavController(fragment).navigate(action)
 }
         return root
@@ -48,9 +50,11 @@ class NoteHomeAdapter(private val context: Context, private val fragment: NoteHo
         return allNotes.size
     }
 
-    fun updateList(newList: List<NoteReminder>) {
-        allNotes.clear()
-        allNotes.addAll(newList)
+    fun updateList(newList: List<NoteReminder>?) {
+        if (newList != null) {
+            allNotes.clear()
+            allNotes.addAll(newList.reversed())
+        }
         notifyDataSetChanged()
     }
 }

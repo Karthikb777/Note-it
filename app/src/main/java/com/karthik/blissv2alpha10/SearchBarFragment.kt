@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -21,6 +23,7 @@ import com.karthik.blissv2alpha10.ui.viewModels.NoteViewModel
 import com.karthik.blissv2alpha10.ui.viewModels.ReminderViewModel
 import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 import kotlinx.android.synthetic.main.fragment_search_bar.*
+import kotlinx.android.synthetic.main.fragment_search_bar.view.*
 
 
 class SearchBarFragment : Fragment() {
@@ -41,21 +44,30 @@ class SearchBarFragment : Fragment() {
             showMenu(it, R.menu.menu_home)
         }
 
+        searchInput.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                searchIcon.setImageResource(R.drawable.ic_close)
+            }
+        }
         searchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("searchInput", s.toString())
+                homeViewModel.setSearch(1)
                 search(s)
-// TODO : add a way to abort search operation, by changing search icon to x and adding on click listener to it
             }
-
             override fun afterTextChanged(s: Editable?) {
-
             }
-
         })
+
+        searchIcon.setOnClickListener {
+                homeViewModel.setSearch(0)
+                searchInput.text.clear()
+                searchInput.clearFocus()
+                searchIcon.setImageResource(R.drawable.ic_search)
+        }
     }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
@@ -82,13 +94,13 @@ class SearchBarFragment : Fragment() {
     private fun search(query: CharSequence?) {
        when(homeViewModel.getCurrent().value) {
            0 -> {
-               noteViewModel.getNoteByTitle(query.toString())
+               noteViewModel.searchNote(query.toString())
            }
            1 -> {
-               reminderViewModel.getNoteByTitle(query.toString())
+               reminderViewModel.searchReminder(query.toString())
            }
            2 -> {
-               todoViewModel.getTodoByTitle(query.toString())
+               todoViewModel.searchTodo(query.toString())
            }
        }
     }

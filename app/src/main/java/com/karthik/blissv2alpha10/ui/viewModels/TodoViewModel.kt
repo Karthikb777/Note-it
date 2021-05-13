@@ -26,6 +26,12 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         gotTodo.value = repository.getTodoByTitle(title)
     }
 
+    fun searchTodo(title: String) {
+        gotTodo.value = allTodos.value?.filter {
+            it.todoTitle.contains(title)
+        }?.toTypedArray()
+    }
+
     val allTodos : LiveData<List<Todo>> = repository.alltodos.asLiveData()
 
     @WorkerThread

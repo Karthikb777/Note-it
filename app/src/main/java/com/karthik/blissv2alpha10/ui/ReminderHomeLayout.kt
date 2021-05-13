@@ -32,9 +32,10 @@ class ReminderHomeLayout : Fragment() {
 
 //        val reminderViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(ReminderViewModel::class.java)
         val reminderViewModel : ReminderViewModel by activityViewModels()
+        val homeViewModel : HomeViewModel by activityViewModels()
 
         rRecyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-        val adapter = ReminderHomeAdapter(requireContext(), this)
+        val adapter = ReminderHomeAdapter(requireContext(), this, homeViewModel)
         rRecyclerView.adapter = adapter
 
         reminderViewModel.allReminders.observe(viewLifecycleOwner, {
@@ -44,6 +45,14 @@ class ReminderHomeLayout : Fragment() {
         reminderViewModel.gotReminder.observe(viewLifecycleOwner, {
             adapter.updateList(it.toList())
         })
+
+        homeViewModel.getSearch().observe(viewLifecycleOwner, {
+            if (it == 0) {
+                adapter.updateList(reminderViewModel.allReminders.value)
+            }
+        })
+
+
 
     }
 

@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.database.entities.Todo
+import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 import com.karthik.blissv2alpha10.ui.viewModels.TodoViewModel
 
-class TodoHomeAdapter(private val context: Context, private val viewModel: TodoViewModel) : RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
+class TodoHomeAdapter(private val context: Context, private val viewModel: TodoViewModel, private val homeViewModel: HomeViewModel) : RecyclerView.Adapter<TodoHomeAdapter.TodoViewHolder>() {
 
     private val allTodos: ArrayList<Todo> = ArrayList()
 
@@ -33,11 +34,13 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
             todo.isCompleted = !todo.isCompleted
             viewModel.updateTodo(todo)
             notifyItemChanged(root.adapterPosition)
+            homeViewModel.setSearch(0)
         }
 
         root.deleteBtn.setOnClickListener {
             viewModel.deleteTodo(allTodos[root.adapterPosition])
             notifyItemRemoved(root.adapterPosition)
+            homeViewModel.setSearch(0)
         }
         return root
     }
@@ -53,6 +56,7 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
             holder.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             holder.completed.setImageResource(R.drawable.ic_check_box)
         } else {
+            holder.title.paintFlags = Paint.ANTI_ALIAS_FLAG
             holder.completed.setImageResource(R.drawable.ic_check_box_outline)
         }
     }
@@ -61,9 +65,11 @@ class TodoHomeAdapter(private val context: Context, private val viewModel: TodoV
         return allTodos.size
     }
 
-    fun updateList(newList: List<Todo>) {
-        allTodos.clear()
-        allTodos.addAll(newList)
+    fun updateList(newList: List<Todo>?) {
+        if (newList != null) {
+            allTodos.clear()
+            allTodos.addAll(newList.reversed())
+        }
         notifyDataSetChanged()
     }
 }

@@ -57,6 +57,11 @@ class NoteHomeLayout : Fragment() {
             adapter.updateList(it.toList())
         })
 
+        homeViewModel.getSearch().observe(viewLifecycleOwner, {
+            if (it == 0) {
+                adapter.updateList(noteViewModel.allNotes.value)
+            }
+        })
     }
 
     override fun onCreateView(

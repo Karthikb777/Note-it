@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
     private val current = MutableLiveData<Int>()
+    private val search = MutableLiveData<Int>()
 
     fun getCurrent() : LiveData<Int> {
         return current
@@ -17,7 +18,16 @@ class HomeViewModel : ViewModel() {
         current.value = curr
     }
 
+    fun getSearch() : LiveData<Int> {
+        return search
+    }
+
+    fun setSearch(s : Int) {
+        search.value = s
+    }
+
     init {
         current.value = 0
+        search.value = -1
     }
 }

@@ -12,8 +12,9 @@ import com.karthik.blissv2alpha10.R
 import com.karthik.blissv2alpha10.database.entities.NoteReminder
 import com.karthik.blissv2alpha10.ui.ReminderHomeLayout
 import com.karthik.blissv2alpha10.ui.ReminderHomeLayoutDirections
+import com.karthik.blissv2alpha10.ui.viewModels.HomeViewModel
 
-class ReminderHomeAdapter(private val context: Context, private val fragment: ReminderHomeLayout): RecyclerView.Adapter<ReminderHomeAdapter.ReminderViewHolder>() {
+class ReminderHomeAdapter(private val context: Context, private val fragment: ReminderHomeLayout, private val viewModel :  HomeViewModel): RecyclerView.Adapter<ReminderHomeAdapter.ReminderViewHolder>() {
 
     private val allReminders: ArrayList<NoteReminder> = ArrayList()
 
@@ -29,6 +30,7 @@ class ReminderHomeAdapter(private val context: Context, private val fragment: Re
         root.reminderCard.setOnClickListener {
 //            safe args
             val action = ReminderHomeLayoutDirections.actionReminderHomeLayoutToNoteReminderView(allReminders[root.adapterPosition])
+            viewModel.setCurrent(10)
             NavHostFragment.findNavController(fragment).navigate(action)
         }
 
@@ -44,9 +46,11 @@ class ReminderHomeAdapter(private val context: Context, private val fragment: Re
         return allReminders.size
     }
 
-    fun updateList(newList: List<NoteReminder>) {
-        allReminders.clear()
-        allReminders.addAll(newList.reversed())
+    fun updateList(newList: List<NoteReminder>?) {
+        if (newList != null) {
+            allReminders.clear()
+            allReminders.addAll(newList.reversed())
+        }
 
         notifyDataSetChanged()
     }

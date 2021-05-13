@@ -171,6 +171,7 @@ class NoteReminderView : Fragment() {
 //        activity?.onBackPressed()
         NavHostFragment.findNavController(this).navigate(R.id.action_noteReminderView_to_noteHomeLayout)
         homeViewModel.setCurrent(0)
+        homeViewModel.setSearch(0)
     }
 
 }
