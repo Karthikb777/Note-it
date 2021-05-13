@@ -1,10 +1,14 @@
 package com.karthik.blissv2alpha10
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +27,7 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private var currentFrag: Int = 0
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         val noteViewModel : NoteViewModel by viewModels()
         val todoViewModel : TodoViewModel by viewModels()
         val reminderViewModel : ReminderViewModel by viewModels()
+
+        if (resources.configuration.isNightModeActive) {
+            fabAdd.setColorFilter(ContextCompat.getColor(this, R.color.yellow_200))
+        }
 
         fabAdd.setOnClickListener {
             when(currentFrag) {
@@ -50,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         homeViewModel.getCurrent().observe(this, Observer {
-//            TODO: use this to remove the search bar fragment while displaying the view fragments
             currentFrag = it
             if(it == -1) {
                 fabAdd.isVisible = false
