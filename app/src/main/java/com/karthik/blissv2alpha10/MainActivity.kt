@@ -52,9 +52,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(newReminderIntent)
                 }
                 2 -> {
-                    val newNoteIntent = Intent(this, CreateTodoActivity::class.java)
-                    startActivity(newNoteIntent)
+                    val newTodoIntent = Intent(this, CreateTodoActivity::class.java)
+                    startActivity(newTodoIntent)
                 }
+
             }
         }
 

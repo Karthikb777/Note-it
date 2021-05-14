@@ -12,13 +12,21 @@
         tools:layout="@layout/fragment_reminder_home_layout" >
         <action
             android:id="@+id/action_noteHomeLayout_to_todoHomeLayout"
-            app:destination="@id/todoHomeLayout" />
+            app:destination="@id/todoHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_noteHomeLayout_to_reminderHomeLayout"
-            app:destination="@id/reminderHomeLayout" />
+            app:destination="@id/reminderHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_noteHomeLayout_to_noteReminderView"
-            app:destination="@id/noteReminderView" />
+            app:destination="@id/noteReminderView"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            />
+
     </fragment>
     <fragment
         android:id="@+id/reminderHomeLayout"
@@ -36,7 +44,11 @@
             app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_reminderHomeLayout_to_noteReminderView"
-            app:destination="@id/noteReminderView" />
+            app:destination="@id/noteReminderView"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            />
+
     </fragment>
     <fragment
         android:id="@+id/todoHomeLayout"
@@ -45,10 +57,17 @@
         tools:layout="@layout/fragment_todo_home_layout" >
         <action
             android:id="@+id/action_todoHomeLayout_to_reminderHomeLayout"
-            app:destination="@id/reminderHomeLayout" />
+            app:destination="@id/reminderHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            />
         <action
             android:id="@+id/action_todoHomeLayout_to_noteHomeLayout"
-            app:destination="@id/noteHomeLayout" />
+            app:destination="@id/noteHomeLayout"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            />
+
     </fragment>
     <fragment
         android:id="@+id/noteReminderView"
@@ -60,9 +79,13 @@
             app:argType="com.karthik.blissv2alpha10.database.entities.NoteReminder" />
         <action
             android:id="@+id/action_noteReminderView_to_noteHomeLayout"
-            app:destination="@id/noteHomeLayout" />
+            app:destination="@id/noteHomeLayout"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_noteReminderView_to_reminderHomeLayout"
-            app:destination="@id/reminderHomeLayout" />
+            app:destination="@id/reminderHomeLayout"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>

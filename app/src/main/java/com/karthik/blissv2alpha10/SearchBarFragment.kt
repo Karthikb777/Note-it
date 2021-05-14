@@ -1,5 +1,6 @@
 package com.karthik.blissv2alpha10
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -80,7 +81,10 @@ class SearchBarFragment : Fragment() {
                 "Notes" -> homeViewModel.setCurrent(0)
                 "Reminders" -> homeViewModel.setCurrent(1)
                 "Todos" -> homeViewModel.setCurrent(2)
-//                "About" -> homeViewModel.currentHome.value = "about"
+                "About" -> {
+                        val aboutIntent = Intent(context, AboutActivity::class.java)
+                        startActivity(aboutIntent)
+                }
             }
             true
         }
@@ -112,5 +116,4 @@ class SearchBarFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_bar, container, false)
     }
-
 }
