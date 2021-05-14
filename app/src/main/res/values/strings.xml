@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">Bliss V2 alpha 1.0</string>
+    <string name="app_name">Note it</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lipsum">Lorem</string>
+    <string name="about_text">A simple note taking and task management app for android.\n
+    This app works completely offline. You can add, edit and delete notes, reminders and todos, add images and voice notes, etc.\n
+        Feel free to explore the app!\n\n
+    This app was created by Karthik HK.\n\n
+        Check out my other projects in my github account.
+    </string>
+    <string name="urlToGithub">https://github.com/Karthikb777</string>
 
 </resources>

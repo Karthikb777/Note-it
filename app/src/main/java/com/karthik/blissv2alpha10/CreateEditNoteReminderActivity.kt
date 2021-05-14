@@ -124,13 +124,13 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
                     try {
                         prepare()
                     } catch (e: IOException) {
-                        Log.e("io", "prepare() failed")
+//                        Log.e("io", "prepare() failed")
                     }
                     start()
                 }
 
                 stopRecordIcon.setOnClickListener {
-                    Toast.makeText(this, "stopped", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Recording stopped", Toast.LENGTH_SHORT).show()
                     voiceRecordText.text = "Voice note added"
 //                    setting the audTitle to the audio uri to be saved to db later
                     audTitle = "$URI/${noteTitle.text}.mp3"
@@ -172,7 +172,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             }
             else {
                 if (isWriteExternalStoragePermissionGranted() && Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
-            Log.e("writePerm", "write permission granted")
+//            Log.e("writePerm", "write permission granted")
                 val URI = getAppDirectories("img")
 
                 val currentTime = Calendar.getInstance().time
@@ -214,7 +214,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
 
             timePicker.addOnPositiveButtonClickListener {
                 // call back code
-                Log.e("timee", "${datePicker.selection!! + toMillis(timePicker.hour, timePicker.minute)}")
+//                Log.e("timee", "${datePicker.selection!! + toMillis(timePicker.hour, timePicker.minute)}")
                 val setReminderInCalendar = datePicker.selection!! + toMillis(timePicker.hour, timePicker.minute)
 
                 reminderTime = "${
@@ -276,7 +276,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             val thumbnail: Bitmap? = data?.getParcelableExtra("data")
             val fullPhotoUri: Uri = data!!.data!!
 
-            Log.e("uriPic", "${fullPhotoUri.lastPathSegment}")
+//            Log.e("uriPic", "${fullPhotoUri.lastPathSegment}")
             // Do work with photo saved at fullPhotoUri
 
             val fullPhoto: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, fullPhotoUri)
@@ -297,12 +297,12 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
     private fun getAppDirectories(type: String) : String {
         val imgURI: String
         val audURI: String
-        Log.e("writePerm1", "working1")
+//        Log.e("writePerm1", "working1")
 
         if (SDK_INT >= Build.VERSION_CODES.R) {
-            Log.e("writePerm1", "" +
-                    ContextCompat.getExternalFilesDirs(this, null)[0].toString())
-            Log.e("writePerm1", "working2")
+//            Log.e("writePerm1", "" +
+//                    ContextCompat.getExternalFilesDirs(this, null)[0].toString())
+//            Log.e("writePerm1", "working2")
 
             val rootDir = ContextCompat.getExternalFilesDirs(this, null)[0]
 //            val rootDir = Environment.getStorageDirectory()
@@ -322,7 +322,7 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
             }
 
         }  else {
-            Log.e("writePerm2", "${Environment.getExternalStorageDirectory()}")
+//            Log.e("writePerm2", "${Environment.getExternalStorageDirectory()}")
 
             val rootDir = Environment.getExternalStorageDirectory()
 
@@ -342,11 +342,11 @@ class CreateEditNoteReminderActivity : AppCompatActivity() {
         }
         when(type) {
             "img" -> {
-                Log.e("writePerm1", imgURI)
+//                Log.e("writePerm1", imgURI)
                 return imgURI
             }
             "aud" -> {
-                Log.e("writePerm1", audURI)
+//                Log.e("writePerm1", audURI)
                 return audURI
             }
         }

@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Fts4
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.RoomDatabase.Callback
 import com.karthik.blissv2alpha10.database.daos.NoteReminderDao
 import com.karthik.blissv2alpha10.database.daos.TodoDao
 import com.karthik.blissv2alpha10.database.entities.NoteReminder
 import com.karthik.blissv2alpha10.database.entities.Todo
+import kotlinx.coroutines.coroutineScope
 
 @Fts4
 @Database(entities = [NoteReminder::class, Todo::class], version = 4, exportSchema = false)

@@ -55,7 +55,7 @@ class SearchBarFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.d("searchInput", s.toString())
+//                Log.d("searchInput", s.toString())
                 homeViewModel.setSearch(1)
                 search(s)
             }

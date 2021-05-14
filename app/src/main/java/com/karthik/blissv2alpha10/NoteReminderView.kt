@@ -4,15 +4,18 @@ import android.app.Application
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.text.style.URLSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.annotation.RequiresApi
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -69,6 +72,24 @@ class NoteReminderView : Fragment() {
         } else {
             view.voice_note_card.isVisible = false
         }
+
+
+        if (view.note_reminder_content.urls.isNotEmpty()) {
+            view.linkLayout.isVisible = true
+            view.linkLayout.isClickable = true
+            view.urls.text = view.note_reminder_content.urls[0]?.url
+
+            view.linkLayout.setOnClickListener {
+                CustomTabsIntent.Builder().build()
+                        .launchUrl(requireContext(), Uri.parse(view.note_reminder_content.urls[0].url));
+            }
+
+        } else {
+            view.linkLayout.isVisible = false
+            view.linkLayout.isClickable = false
+        }
+
+
 
         if(args.viewNote.imageUri != "") {
             val noteImg = view.findViewById<ImageView>(R.id.noteImage)

@@ -51,9 +51,6 @@ class ReminderHomeLayout : Fragment() {
                 adapter.updateList(reminderViewModel.allReminders.value)
             }
         })
-
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
