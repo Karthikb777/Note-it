@@ -14,6 +14,5 @@ A simple note taking and task management app for android.
 
 You can download the app [here.](https://github.com/Karthikb777/Note-it/releases/tag/v1.0)
 
-This app was created by Karthik HK.
-Check out my other projects.
+
 
