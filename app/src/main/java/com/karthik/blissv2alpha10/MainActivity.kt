@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity() {
         val todoViewModel : TodoViewModel by viewModels()
         val reminderViewModel : ReminderViewModel by viewModels()
 
-        if (resources.configuration.isNightModeActive) {
-            fabAdd.setColorFilter(ContextCompat.getColor(this, R.color.yellow_200))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            if (resources.configuration.isNightModeActive) {
+                fabAdd.setColorFilter(ContextCompat.getColor(this, R.color.yellow_200))
+            }
         }
 
         fabAdd.setOnClickListener {
